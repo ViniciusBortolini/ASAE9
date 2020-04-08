@@ -32,12 +32,12 @@ class ClientesController extends Controller{
 		$cliente->estado = $estado;
 
 		if($cliente->save()){
-			 $retorno =  TRUE;
+			$retorno =  TRUE;
 		}else{
 			throw new\Exception("Nao foi possivel incluir");
-         die;
+			die;
 		}
-		 return redirect()->route('listar', ["mensagem"=>$retorno]);
+		return redirect()->route('listar', ["mensagem"=>$retorno]);
 	}
 	/**
     * Lista os clientes do sistema
@@ -49,7 +49,44 @@ class ClientesController extends Controller{
 		return view("ClientesResultado", ["cli" => $clientes]);
 	}
 
+	function telaAlteracao($id){
+		$clientes = Clientes::find($id);
+		return view("tela_alteracao_clientes", ["c" => $clientes]);
+	}
+
+	function alterar(Request $req, $id){
+		$nome = $req->input('nome');
+		$cep = $req->input('cep');
+		$estado = $req->input('estado');
+		$cidade = $req->input('cidade');
+		$endereco = $req->input('endereco');
+	
+
+		$cliente = Clientes::find($id);
+		$cliente->nome = $nome;
+		$cliente->cep = $cep;
+		$cliente->estado = $estado;
+		$cliente->cidade = $cidade;
+		$cliente->endereco = $endereco;
+
+		if($cliente->save()){
+			$retorno =  TRUE;
+		}else{
+			throw new\Exception("Nao foi possivel incluir");
+			die;
+		}
+		return redirect()->route('listar', ["mensagem"=>$retorno]);
+	}
+	function excluir($id){
+		$cliente = Clientes::find($id);
+
+		if($cliente->delete()){
+			$retorno =  TRUE;
+		}else{
+			throw new\Exception("Nao foi possivel incluir");
+			die;
+		}
+		return redirect()->route('listar', ["mensagem"=>$retorno]);
+	}
 }
-
-
 ?>
