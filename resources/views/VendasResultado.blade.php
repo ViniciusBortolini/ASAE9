@@ -1,7 +1,19 @@
+	<style type="text/css">
 
+		#tes1{
+			height: 14%;
+		}
+
+	</style>
 @extends('template')
 @section('conteudo')
-<h1>Vendas Realizadas</h1>
+				<nav class="navbar navbar-dark bg-dark mt-1" id=tes1>
+					<a class="navbar-brand">Lista Vendas</a>
+					<form class="form-inline">
+						<input class="form-control mr-sm-2" type="search" placeholder="..." aria-label="Search">
+						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Filtrar</button>
+					</form>
+				</nav>
 <div class="table-responsive">
 	<table class="table table-striped table-dark">
 		<thead>
@@ -14,7 +26,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			@foreach($vend as $v)
+			@foreach($vendas as $v)
 			<tr>
 				<td>{{$v->id}}</td>
 				<td>{{ App\Clientes::find($v->id_cliente)->nome }}</td>
@@ -23,6 +35,7 @@
 				<td>
 					<a class="btn btn-warning" href="#"> Alterar</a>
 					<a class="btn btn-danger" href="#">Excluir</a>
+					
 				</td>
 			</tr>
 			@endforeach

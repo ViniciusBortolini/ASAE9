@@ -10,6 +10,6 @@ class Vendas extends Model
     protected $primaryKey = 'id';
 
         function cliente(){
-    	return $this->belongsTo('App\Cliente', 'id_cliente', 'id');
+    	return $this->belongsTo('App\Clientes', 'id_cliente', 'id');
     }
 }

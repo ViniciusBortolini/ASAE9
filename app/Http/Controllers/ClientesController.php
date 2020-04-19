@@ -37,7 +37,7 @@ class ClientesController extends Controller{
 			throw new\Exception("Nao foi possivel incluir");
 			die;
 		}
-		return redirect()->route('listar', ["mensagem"=>$retorno]);
+		return redirect()->route('cliente_listar', ["mensagem"=>$retorno]);
 	}
 	/**
     * Lista os clientes do sistema
@@ -45,8 +45,11 @@ class ClientesController extends Controller{
     * @return retorna em cli todos os clientes que estão em $clientes
     */
 	function listar(){
-		$clientes = Clientes::all();/*coletar todos os clientes*/
-		return view("ClientesResultado", ["cli" => $clientes]);
+		if (session()->has("login")){
+			$clientes = Clientes::all();/*coletar todos os clientes*/
+			return view("ClientesResultado", ["cli" => $clientes]);
+		}
+		return view("tela_login");
 	}
 
 	function telaAlteracao($id){
@@ -75,7 +78,7 @@ class ClientesController extends Controller{
 			throw new\Exception("Nao foi possivel incluir");
 			die;
 		}
-		return redirect()->route('listar', ["mensagem"=>$retorno]);
+		return redirect()->route('cliente_listar', ["mensagem"=>$retorno]);
 	}
 	function excluir($id){
 		$cliente = Clientes::find($id);
@@ -86,7 +89,7 @@ class ClientesController extends Controller{
 			throw new\Exception("Nao foi possivel incluir");
 			die;
 		}
-		return redirect()->route('listar', ["mensagem"=>$retorno]);
+		return redirect()->route('cliente_listar', ["mensagem"=>$retorno]);
 	}
 }
 ?>
