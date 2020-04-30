@@ -26,4 +26,11 @@ Route::get('/venda/cliente/{id}', 'VendasController@vendasPorCliente')->name('ve
 Route::get('/tela_login', 'AppController@tela_login')->name('tela_login');
 Route::get('/logout', 'AppController@logout')->name('logout');
 Route::post('/login', 'AppController@login')->name('logar');
+
+Route::get('/venda/{id}/itens', 'VendasController@itensVendas')->name('vendas_itens');
+
+Route::get('/venda/{id}/itens/novo', 'VendasController@telaAdicionarItem')->name('vendas_item_novo');
+Route::post('/venda/{id}/itens/adicionar', 'VendasController@adicionarItem')->name('vendas_item_add');
+
+Route::get('/venda/{id}/itens/remover/{id_pivot}','VendasController@excluirItem')->name('vendas_item_delete');
 ?>

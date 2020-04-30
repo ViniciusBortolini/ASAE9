@@ -10,10 +10,7 @@
 		<option value="{{ $c->id }}">  {{ $c->id }} {{ $c->nome }} </option>
 		@endforeach
 	</select>
-	<h6 class="mt-2">Descrição</h6>
-	<input type="text" name="descricao" placeholder="...">
-	<h6 class="mt-2">Valor</h6>
-	<input type="number" step="0.01" name="valor" placeholder="...">
+	
 	<br>
 	<input type="submit" class="btn btn-secondary btn-lg mt-3" value="Incluir" class=>
 </form>
