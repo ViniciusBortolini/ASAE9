@@ -53,8 +53,13 @@
         </div>
       </li>
        <li class="nav-item">
-        <a class="nav-link" href="{{ route('logout') }}">Logout</a>
-      </li>
+        <a class="nav-link" href="{{ route('logout') }}">Logout</a>    
+    </li>
+    <li>
+      <a class="navbar-brand" href="#">{{Auth::user()->name}}
+  </a>
+
+    </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Buscar..." aria-label="Search">
@@ -67,6 +72,10 @@
 		<div class="row">
 			<div class="col-md-2"></div>	
 			<div class="col-md-8">
+        @if (session()->has('mensagem'))
+          <div class="alert alert-danger">{{ Auth::user()->name }} {{ session('mensagem') }}</div>
+          {{ session()->forget(['mensagem']) }}
+        @endif
 				@yield('conteudo')
 			</div>
 			<div class="col-md-2"></div>	

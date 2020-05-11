@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Clientes;
+use Auth;
 
 class ClientesController extends Controller{
 	function telaCadastro(){
@@ -45,11 +46,11 @@ class ClientesController extends Controller{
     * @return retorna em cli todos os clientes que estão em $clientes
     */
 	function listar(){
-		if (session()->has("login")){
+		
 			$clientes = Clientes::all();/*coletar todos os clientes*/
 			return view("ClientesResultado", ["cli" => $clientes]);
-		}
-		return view("tela_login");
+		
+		//return view("tela_login");
 	}
 
 	function telaAlteracao($id){
@@ -82,6 +83,10 @@ class ClientesController extends Controller{
 	}
 	function excluir($id){
 		$cliente = Clientes::find($id);
+
+		foreach ($cliente->vendas as $v) {
+			$v->delete();
+		}
 
 		if($cliente->delete()){
 			$retorno =  TRUE;
